@@ -135,9 +135,11 @@ print('Performing stochastic gradient descent (with adagrad update) ...')
 while True:
 
     if train:
+        # parameters are being trained
         data = train_data
 
         if epoch == args.epochs:
+            # training is done, move to calculating training RMSE
             calc_train_rmse = True
             train = False
             rmse = 0.0
@@ -148,11 +150,13 @@ while True:
             print('Calculating training RMSE ...')
 
         elif args.epochs - epoch < 1.0:
+            # less than one epoch of training left
             iters = int((args.epochs - epoch) * len(data))
             data = data[:iters]
             epoch = args.epochs
 
         else:
+            # one more epoch of training
             epoch += 1
 
         # random seed for reproducibility
@@ -165,10 +169,12 @@ while True:
 
 
     elif calc_train_rmse:
-
+        # training RMSE has been calculated
+        # rather training SSE has been calculated, convert it to RMSE
         train_rmse = np.sqrt(rmse / len(train_data))
         print(f'Training RMSE: {train_rmse:.6f}')
 
+        # move to calculating test RMSE
         data = test_data
         calc_test_rmse = True
         calc_train_rmse = False
@@ -176,7 +182,7 @@ while True:
         print('Calculating test RMSE ...')
 
     elif calc_test_rmse:
-
+        # test RMSE - rather SSE - has been calculated, convert it to RMSE
         test_rmse = np.sqrt(rmse / len(test_data))
         print(f'Test RMSE: {test_rmse:.6f}')
         break
