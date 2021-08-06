@@ -8,13 +8,15 @@ The model implemented is a very basic matrix factorization model that has the fo
 
 Essentially, this model predicts the rating given by a user 'u' to a movie 'm' by learning two vectors, one for 'u' and one for 'm', and taking their dot product (along with adding a couple of bias terms). Hence the name `movievecs`: vectors are learnt for movies (as well as users).
 
+This model is a very simplified version of the matrix factorization model discussed in [Koren (2009)](https://netflixprize.com/assets/GrandPrize2009_BPC_BellKor.pdf).
+
 ### Requirements
 
-  - Bash shell (on Windows you can use Git Bash),
-  - Python (any 3.x version should work), as well as Numpy (and `tqdm`, to display nice progress bars):
+  - Python, as well as Numpy (and `tqdm`, to display nice progress bars):
     ```
     $ pip install numpy tqdm
     ```
+  - Bash shell (on Windows you can use Git Bash).
 
 ### Usage
 
@@ -78,12 +80,14 @@ rating = (
 ```
 [Here](clustering/clustering.md), I discuss a clustering experiment on the movie vectors which yields very interesting results.
 
-More details on both the scripts (`extract.sh` and  `train.py`) are given in the [Details](#details) section below.
+More details on both the scripts (`extract.sh` and  `train.py`) are given in the [details](#details) section below.
 
 
-### Time
+### Notes
 
-The `train.py` script is quite fast. On a PC with 8 GB RAM and a 4-core CPU, given the extracted data of 36 movies that contains about 3.7 million ratings in total, this script takes about 3 minutes to run.
+Note that the Netflix Prize data was published in 2006, so you will not find the most recent of films in that dataset.
+
+A note on timing: the `train.py` script is quite fast. On a PC with 8 GB RAM and a 4-core CPU, given the extracted data of 36 movies that contains about 3.7 million ratings in total, this script takes about 3 minutes to run.
 
 
 ### Details

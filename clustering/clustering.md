@@ -52,8 +52,6 @@ Test RMSE: 0.918200
 Trained parameters saved to params.pkl
 ```
 
-(The regularization penalty values were taken from Koren (2009), p. 7?, while the learning rates were chosen by fiddling around with some numbers close to 0.1.)
-
 This set of 36 movies amounts to a little more than 3.7 million ratings in total, primarily because many of the movies are well-known.
 
 Training concludes with a training RMSE of approx. 0.78 and a test RMSE of approx. 0.92. The RMSE can be interpreted as a measure of how much the predicted rating deviates from the true rating on average, i.e. a test RMSE of 0.92 indicates that typically the rating is off by a little less than 1 star.
