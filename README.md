@@ -10,8 +10,11 @@ Essentially, this model predicts the rating given by a user 'u' to a movie 'm' b
 
 ### Requirements
 
-  - Bash shell (on Windows you can use Git Bash)
-  - Python (any 3.x version should work) and Numpy
+  - Bash shell (on Windows you can use Git Bash),
+  - Python (any 3.x version should work), as well as Numpy (and `tqdm`, to display nice progress bars):
+    ```
+    $ pip install numpy tqdm
+    ```
 
 ### Usage
 
@@ -40,17 +43,17 @@ Essentially, this model predicts the rating given by a user 'u' to a movie 'm' b
      ```
      $ python3 train.py
      Loading rating data ... 
-     files: 100%|███████████████████████████████████| 36/36 [00:36<00:00,  1.02s/it]
+     files: 100%|███████████████████████████████████| 36/36 [00:37<00:00,  1.04s/it]
      3742159 total.
      Split into training data with 2805813 ratings and test data with 936346 ratings.
      Performing stochastic gradient descent (with adagrad update) ...
-     iterations: 100%|█████████████████| 2805813/2805813 [01:49<00:00, 25691.20it/s]
+     iterations: 100%|█████████████████| 2805813/2805813 [01:46<00:00, 26392.53it/s]
      Calculating training RMSE ...
-     iterations: 100%|████████████████| 2805813/2805813 [00:17<00:00, 156473.46it/s]
-     Training RMSE: 0.779721
+     iterations: 100%|████████████████| 2805813/2805813 [00:16<00:00, 168617.65it/s]
+     Training RMSE: 0.793794
      Calculating test RMSE ...
-     iterations: 100%|██████████████████| 936346/936346 [00:05<00:00, 161163.66it/s]
-     Test RMSE: 0.918200
+     iterations: 100%|██████████████████| 936346/936346 [00:05<00:00, 174716.14it/s]
+     Test RMSE: 0.919558
      Trained parameters saved to params.pkl
      ```
   7. You can load the trained parameters using Python's `pickle` module:
@@ -73,7 +76,7 @@ rating = (
     np.dot(params['user_vecs'][u], params['movie_vecs'][m])
 )
 ```
-In [clustering.md](clustering.md), I discuss a clustering experiment on the movie vectors which yields very interesting results.
+[Here](clustering/clustering.md), I discuss a clustering experiment on the movie vectors which yields very interesting results.
 
 More details on both the scripts (`extract.sh` and  `train.py`) are given in the [Details](#details) section below.
 
@@ -118,17 +121,17 @@ blah blah not found.
 ```
 $ python3 train.py
 Loading rating data ... 
-files: 100%|███████████████████████████████████| 36/36 [00:36<00:00,  1.02s/it]
+files: 100%|███████████████████████████████████| 36/36 [00:37<00:00,  1.04s/it]
 3742159 total.
 Split into training data with 2805813 ratings and test data with 936346 ratings.
 Performing stochastic gradient descent (with adagrad update) ...
-iterations: 100%|█████████████████| 2805813/2805813 [01:49<00:00, 25691.20it/s]
+iterations: 100%|█████████████████| 2805813/2805813 [01:46<00:00, 26392.53it/s]
 Calculating training RMSE ...
-iterations: 100%|████████████████| 2805813/2805813 [00:17<00:00, 156473.46it/s]
-Training RMSE: 0.779721
+iterations: 100%|████████████████| 2805813/2805813 [00:16<00:00, 168617.65it/s]
+Training RMSE: 0.793794
 Calculating test RMSE ...
-iterations: 100%|██████████████████| 936346/936346 [00:05<00:00, 161163.66it/s]
-Test RMSE: 0.918200
+iterations: 100%|██████████████████| 936346/936346 [00:05<00:00, 174716.14it/s]
+Test RMSE: 0.919558
 Trained parameters saved to params.pkl
 ```
 this script performs the following:
@@ -138,14 +141,7 @@ this script performs the following:
   4. calculates the RMSE (root-mean-squared error) of the trained model over the training and test sets,
   5. and saves the trained parameters to disk.
 
-The user and movie vectors learnt have a dimensionality of 20 by default. The default values of the learning rates (eta) and L2-regularization penalties (lambda) of the user and movie biases and vectors are listed below:
-
-|     | eta | lambda |
-| :-- | --: | -----: |
-| user biases | 0.07 | 0.03 |
-| movie biases | 0.07 | 0.03 |
-| user vectors | 0.08 | 0.0015 |
-| movie vectors | 0.08 | 0.0015 |
+The user and movie vectors learnt have a dimensionality of 20 by default. The learning rate of all the biases and vectors is 0.1 by default and the L2-regularization penalty is 0.01.
 
 You can change all of these default values, of course:
 ```
