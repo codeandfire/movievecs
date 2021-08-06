@@ -30,28 +30,28 @@ parser.add_argument(
     '--track-loss', type=int, default=None, help='track stochastic loss after every given number of iterations'
 )
 parser.add_argument(
-    '--eta-bu', type=float, default=0.07, help='learning rate for user biases'
+    '--eta-bu', type=float, default=0.1, help='learning rate for user biases'
 )
 parser.add_argument(
-    '--eta-bm', type=float, default=0.07, help='learning rate for movie biases'
+    '--eta-bm', type=float, default=0.1, help='learning rate for movie biases'
 )
 parser.add_argument(
-    '--eta-vu', type=float, default=0.08, help='learning rate for user vectors'
+    '--eta-vu', type=float, default=0.1, help='learning rate for user vectors'
 )
 parser.add_argument(
-    '--eta-vm', type=float, default=0.08, help='learning rate for movie vectors'
+    '--eta-vm', type=float, default=0.1, help='learning rate for movie vectors'
 )
 parser.add_argument(
-    '--lambda-bu', type=float, default=0.03, help='regularization penalty for user biases'
+    '--lambda-bu', type=float, default=0.01, help='regularization penalty for user biases'
 )
 parser.add_argument(
-    '--lambda-bm', type=float, default=0.03, help='regularization penalty for movie biases'
+    '--lambda-bm', type=float, default=0.01, help='regularization penalty for movie biases'
 )
 parser.add_argument(
-    '--lambda-vu', type=float, default=0.0015, help='regularization penalty for user vectors'
+    '--lambda-vu', type=float, default=0.01, help='regularization penalty for user vectors'
 )
 parser.add_argument(
-    '--lambda-vm', type=float, default=0.0015, help='regularization penalty for movie vectors'
+    '--lambda-vm', type=float, default=0.01, help='regularization penalty for movie vectors'
 )
 args = parser.parse_args()
 
