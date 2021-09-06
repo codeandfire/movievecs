@@ -1,6 +1,0 @@
-.gitignore
-dataset
-env
-netflix
-params.pkl
-train.log
