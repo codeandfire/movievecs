@@ -18,41 +18,29 @@ from tqdm import tqdm
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument(
-    '-d', '--dim', type=int, default=20, help='dimensionality of learnt vectors'
-)
+    '-d', '--dim', type=int, default=20, help='dimensionality of learnt vectors')
 parser.add_argument(
-    '-e', '--epochs', type=float, default=1.0, help='training epochs (a fraction is also allowed)'
-)
+    '-e', '--epochs', type=float, default=1.0, help='training epochs (a fraction is also allowed)')
 parser.add_argument(
-    '-s', '--test-split', type=float, default=0.25, help='fraction of instances in test split'
-)
+    '-s', '--test-split', type=float, default=0.25, help='fraction of instances in test split')
 parser.add_argument(
-    '--track-loss', type=int, default=None, help='track stochastic loss after every given number of iterations'
-)
+    '--track-loss', type=int, default=None, help='track stochastic loss after every given number of iterations')
 parser.add_argument(
-    '--eta-bu', type=float, default=0.1, help='learning rate for user biases'
-)
+    '--eta-bu', type=float, default=0.1, help='learning rate for user biases')
 parser.add_argument(
-    '--eta-bm', type=float, default=0.1, help='learning rate for movie biases'
-)
+    '--eta-bm', type=float, default=0.1, help='learning rate for movie biases')
 parser.add_argument(
-    '--eta-vu', type=float, default=0.1, help='learning rate for user vectors'
-)
+    '--eta-vu', type=float, default=0.1, help='learning rate for user vectors')
 parser.add_argument(
-    '--eta-vm', type=float, default=0.1, help='learning rate for movie vectors'
-)
+    '--eta-vm', type=float, default=0.1, help='learning rate for movie vectors')
 parser.add_argument(
-    '--lambda-bu', type=float, default=0.01, help='regularization penalty for user biases'
-)
+    '--lambda-bu', type=float, default=0.01, help='regularization penalty for user biases')
 parser.add_argument(
-    '--lambda-bm', type=float, default=0.01, help='regularization penalty for movie biases'
-)
+    '--lambda-bm', type=float, default=0.01, help='regularization penalty for movie biases')
 parser.add_argument(
-    '--lambda-vu', type=float, default=0.01, help='regularization penalty for user vectors'
-)
+    '--lambda-vu', type=float, default=0.01, help='regularization penalty for user vectors')
 parser.add_argument(
-    '--lambda-vm', type=float, default=0.01, help='regularization penalty for movie vectors'
-)
+    '--lambda-vm', type=float, default=0.01, help='regularization penalty for movie vectors')
 args = parser.parse_args()
 
 if args.track_loss is not None:
@@ -98,9 +86,8 @@ for filename in files_with_progress_bar:
 
 
 print('{} total.'.format(len(train_data) + len(test_data)))
-print('Split into training data with {} ratings and test data with {} ratings.'.format(
-    len(train_data), len(test_data)
-))
+print(
+    'Split into training data with {} ratings and test data with {} ratings.'.format(len(train_data), len(test_data)))
 
 movie_names = sorted(set(r.movie for r in train_data + test_data))
 user_ids = sorted(set(r.user for r in train_data + test_data))
@@ -203,10 +190,8 @@ while True:
         true = rating.value    # true rating value
 
         # predicted rating value
-        pred = (
-            mu + user_biases[u] + movie_biases[m]
-            + np.dot(user_vecs[u], movie_vecs[m])
-        )
+        pred = (mu + user_biases[u] + movie_biases[m]
+                + np.dot(user_vecs[u], movie_vecs[m]))
 
         loss = (true - pred) ** 2
 
@@ -250,7 +235,6 @@ with open('params.pkl', 'wb') as f:
             'movie_vecs': movie_vecs,
             'user_ids': user_ids,
             'movie_names': movie_names
-        }, f
-    )
+        }, f)
 
 print('Trained parameters saved to params.pkl')
